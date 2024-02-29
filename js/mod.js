@@ -1,8 +1,8 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
-	pointsName: "points",
+	name: "The Fantasy Rpg Tree",
+	id: "draxMod",
+	author: "Draxtor",
+	pointsName: "exp",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
@@ -13,13 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.1",
+	name: "A new Beginning",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
+	<h3>v0.1</h3><br>
+		- Starting project.<br>
 		- Added stuff.`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
@@ -39,10 +39,12 @@ function canGenPoints(){
 
 // Calculate points/sec!
 function getPointGen() {
-	if(!canGenPoints())
-		return new Decimal(0)
-
+	if(!canGenPoints()) return new Decimal(0)
+	
 	let gain = new Decimal(1)
+	if (hasUpgrade('l', 11)) gain = gain.times(2)
+	if (hasUpgrade('l', 12)) gain = gain.times(upgradeEffect('l', 12))
+	
 	return gain
 }
 
